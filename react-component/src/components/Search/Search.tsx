@@ -1,7 +1,7 @@
 import React from 'react';
 
 type State = {
-  value?: string;
+  valueInput?: undefined | string;
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -10,29 +10,26 @@ type Props = {};
 class Search extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { value: '' };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { valueInput: '' };
   }
 
-  handleChange(event: React.FormEvent<HTMLInputElement>) {
-    this.setState({ value: (event.target as HTMLInputElement).value });
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ valueInput: e.target.value });
+    console.log(this.state.valueInput);
+  };
+
+  componentDidMount() {
+    const local = localStorage.getItem('search');
+    local ? this.setState({ valueInput: local }) : localStorage.setItem('search', '');
   }
 
-  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    const val: string | undefined = this.state.value;
-    console.log(val);
-    event.preventDefault();
+  componentWillUnmount() {
+    const valueInput = this.state.valueInput ? this.state.valueInput : ' ';
+    localStorage.setItem('search', valueInput);
   }
 
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="search" value={this.state.value} onChange={this.handleChange} />
-        <input type="submit" value="Sesrch" />
-      </form>
-    );
+    return <input type="search" value={this.state.valueInput} onChange={this.handleChange} />;
   }
 }
 
