@@ -3,22 +3,25 @@ import { NavLink } from 'react-router-dom';
 import '../Header/Header.css';
 
 const Header = () => {
+  const setActive = ({ isActive }: { isActive: boolean }): string =>
+    isActive ? 'active-link' : '';
+
   return (
     <div className="Header">
       <nav>
         <ul className="Header-ul">
           <li>
-            <NavLink to="/" style={{ textDecoration: 'none' }}>
+            <NavLink to="/" className={setActive} style={{ textDecoration: 'none' }}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" style={{ textDecoration: 'none' }}>
+            <NavLink to="/about" className={setActive} style={{ textDecoration: 'none' }}>
               About Us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/test" style={{ textDecoration: 'none' }}>
+            <NavLink to="/test" className={setActive} style={{ textDecoration: 'none' }}>
               Test
             </NavLink>
           </li>

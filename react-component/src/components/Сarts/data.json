@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Airpods 2",
+    "brand": "Apple",
+    "price": 200,
+    "images": "/img/Airpods2.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Samsung Galaxy Buds 2",
+    "brand": "Samsung",
+    "price": 300,
+    "images": "/img/Samsung2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "TWS F-9",
+    "brand": "Xiaomi",
+    "price": 240,
+    "images": "/img/F9-2.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Samsung Galaxy Buds Pro",
+    "brand": "Samsung",
+    "price": 420,
+    "images": "/img/Samsung1.jpg"
+  },
+  {
+    "id": 5,
+    "title": "TWS i100",
+    "brand": "Xiaomi",
+    "price": 560,
+    "images": "/img/F9-1.jpg"
+  },
+  {
+    "id": 6,
+    "title": "AirPods 3",
+    "brand": "Apple",
+    "price": 340,
+    "images": "/img/AirPods3.jpg"
+  }
+]
