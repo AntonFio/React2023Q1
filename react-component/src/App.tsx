@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header/Header';
-import { Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AboutUs from './page/AboutUs';
 import Error from './page/Error';
 import Home from './page/Home';
