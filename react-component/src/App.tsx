@@ -5,6 +5,7 @@ import AboutUs from './page/AboutUs';
 import Error from './page/Error';
 import Home from './page/Home';
 import Test from './page/Test';
+import React from 'react';
 
 function App() {
   return (
