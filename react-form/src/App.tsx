@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import './App.css';
 import React, { Component } from 'react';
+import Cart from './components/Cart';
 
 interface Prop {
   valueName: string;
@@ -8,10 +9,16 @@ interface Prop {
   valueSelect: string;
   valueCheckbox: boolean;
   valueRadio: boolean;
+  images?: Blob | MediaSource | null;
 }
+
+// interface Val {
+//   images: File | null;
+// }
 
 interface State {
   data: Prop[];
+  // img: Val[];
 }
 
 export default class App extends Component<{}, State> {
@@ -22,6 +29,7 @@ export default class App extends Component<{}, State> {
       valueSelect: string;
       valueCheckbox: boolean;
       valueRadio: boolean;
+      images: Blob | MediaSource;
     }[],
   };
 
@@ -30,6 +38,8 @@ export default class App extends Component<{}, State> {
   dateSelect = React.createRef<HTMLSelectElement>();
   checkbox = React.createRef<HTMLInputElement>();
   inputRadio = React.createRef<HTMLInputElement>();
+  inputFile = React.createRef<HTMLInputElement>();
+  fileInputRef = React.createRef<HTMLInputElement>();
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,34 +54,38 @@ export default class App extends Component<{}, State> {
       valueSelect: this.dateSelect.current!.value,
       valueCheckbox: this.checkbox.current!.checked,
       valueRadio: this.inputRadio.current!.checked,
+      images: this.fileInputRef.current?.files && this.fileInputRef.current.files[0],
     };
     this.setState((prevState) => ({ data: [...prevState.data, data] }));
   };
 
-  handleClearButtonClick = () => {
-    this.inputName.current!.value = '';
-    this.inputDate.current!.value = '';
-    this.dateSelect.current!.value = '';
-    this.checkbox.current!.checked;
-    this.inputRadio.current!.checked;
-  };
+  // handleClearButtonClick = () => {
+  //   this.inputName.current!.value = '';
+  //   this.inputDate.current!.value = '';
+  //   this.dateSelect.current!.value = '';
+  //   this.checkbox.current!.checked;
+  //   this.inputRadio.current!.checked;
+  // };
 
   render() {
     const { data } = this.state;
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        <form className="Form" onSubmit={this.handleSubmit}>
           <div>
+            <span>Имя:</span>
             <input type="text" name="inputName" ref={this.inputName} required />
           </div>
           <div>
+            <span>Дата:</span>
             <input type="date" name="inputDate" ref={this.inputDate} required />
           </div>
           <div>
-            <select name="selectValue" ref={this.dateSelect} required>
+            <span>Город:</span>
+            <select className="Selrct-form" name="selectValue" ref={this.dateSelect} required>
               <option>Minsk</option>
-              <option>Belarus</option>
-              <option>Ucrain</option>
+              <option>Russia</option>
+              <option>Ukraine</option>
             </select>
           </div>
           <div>
@@ -81,17 +95,22 @@ export default class App extends Component<{}, State> {
             <input type="radio" name="radio" ref={this.inputRadio} required />
           </div>
           <div>
-            <input type="submit" value="Submit" />
+            <input type="file" accept="image/*" ref={this.fileInputRef} />
+          </div>
+          <div>
+            <input className="Btn-form" type="submit" value="Submit" />
           </div>
         </form>
-        <div>
-          {data.map((item, index) => (
-            <div key={index}>
-              <h3>{item.valueName}</h3>
-              <p>{item.valueDate}</p>
-            </div>
-          ))}
-        </div>
+
+        {data.map((item, index) => (
+          <Cart
+            key={index}
+            name={item.valueName}
+            date={item.valueDate}
+            img={URL.createObjectURL(item.images)}
+            city={item.valueSelect}
+          />
+        ))}
       </>
     );
   }
