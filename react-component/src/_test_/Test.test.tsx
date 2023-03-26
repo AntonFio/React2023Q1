@@ -1,4 +1,4 @@
-import Test from '../page/Test';
+import Test from '../page/Form';
 import { describe } from 'vitest';
 import { render } from '@testing-library/react';
 

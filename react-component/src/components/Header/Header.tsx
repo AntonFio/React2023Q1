@@ -21,8 +21,8 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/test" className={setActive} style={{ textDecoration: 'none' }}>
-              Test
+            <NavLink to="/form" className={setActive} style={{ textDecoration: 'none' }}>
+              Form
             </NavLink>
           </li>
         </ul>
