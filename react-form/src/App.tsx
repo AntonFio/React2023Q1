@@ -15,6 +15,7 @@ interface Prop {
 interface State {
   data: Prop[];
   isValidName: boolean;
+  isImages: boolean;
 }
 
 export default class App extends Component<{}, State> {
@@ -28,6 +29,7 @@ export default class App extends Component<{}, State> {
       images: Blob | MediaSource;
     }[],
     isValidName: true,
+    isImages: true,
   };
 
   inputName = React.createRef<HTMLInputElement>();
@@ -43,6 +45,25 @@ export default class App extends Component<{}, State> {
     const nameFullReg = /^(([a-zA-Z]|[а-яА-Я]){3,})*$/;
     if (!nameFullReg.test(this.inputName.current!.value) || this.inputName.current!.value === '') {
       this.setState({ isValidName: false });
+      // if (
+      //   this.fileInputRef.current?.files &&
+      //   this.fileInputRef.current.files[0] &&
+      //   this.fileInputRef.current?.files.length > 0
+      // ) {
+      //   this.setState({ isImages: false });
+      //   return false;
+      // } else {
+      //   return false;
+      // }
+      return false;
+    } else if (
+      !(
+        this.fileInputRef.current!.files &&
+        this.fileInputRef.current!.files[0] &&
+        this.fileInputRef.current!.files.length > 0
+      )
+    ) {
+      this.setState({ isImages: false });
       return false;
     } else {
       const data = {
@@ -53,24 +74,15 @@ export default class App extends Component<{}, State> {
         valueRadio: this.inputRadio.current!.checked,
         images: this.fileInputRef.current?.files && this.fileInputRef.current.files[0],
       };
-      this.setState((prevState) => ({ data: [...prevState.data, data], isValidName: true }));
+      this.setState((prevState) => ({
+        data: [...prevState.data, data],
+        isValidName: true,
+        isImages: true,
+      }));
       console.log(this.inputRadio.current!.name);
       e.currentTarget.reset();
     }
-    // const valueName = this.inputName.current?.value || '';
-    // const valueDate = this.inputDate.current?.value || '';
-    // const valueSelect = this.dateSelect.current?.value || '';
-    // const valueCheckbox = this.checkbox.current?.checked;
-    // const valueRadio = this.inputRadio.current?.checked;
   };
-
-  // handleClearButtonClick = () => {
-  //   this.inputName.current!.value = '';
-  //   this.inputDate.current!.value = '';
-  //   this.dateSelect.current!.value = '';
-  //   this.checkbox.current!.checked;
-  //   this.inputRadio.current!.checked;
-  // };
 
   render() {
     const { data } = this.state;
@@ -87,7 +99,11 @@ export default class App extends Component<{}, State> {
               ref={this.inputName}
               required
             />
-            {!this.state.isValidName ? <p>error</p> : ''}
+            {!this.state.isValidName ? (
+              <p style={{ margin: '0', padding: '0', color: 'red' }}>введите корректное имя</p>
+            ) : (
+              ''
+            )}
           </div>
           <div>
             <span>Дата:</span>
@@ -136,6 +152,11 @@ export default class App extends Component<{}, State> {
           </div>
           <div>
             <input type="file" accept="image/*" ref={this.fileInputRef} />
+            {!this.state.isImages ? (
+              <p style={{ margin: '0', padding: '0', color: 'red' }}>выбери картинку</p>
+            ) : (
+              ''
+            )}
           </div>
           <div>
             <input className="Btn-form" type="submit" value="Submit" />
