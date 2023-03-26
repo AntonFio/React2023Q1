@@ -57,6 +57,8 @@ export default class App extends Component<{}, State> {
       images: this.fileInputRef.current?.files && this.fileInputRef.current.files[0],
     };
     this.setState((prevState) => ({ data: [...prevState.data, data] }));
+
+    e.currentTarget.reset();
   };
 
   // handleClearButtonClick = () => {
@@ -69,12 +71,24 @@ export default class App extends Component<{}, State> {
 
   render() {
     const { data } = this.state;
+
+    const nameFullReg = /^(([a-zA-Z]|[а-яА-Я]){3,})*$/;
+    let a: JSX.Element | string = '';
+
+    this.state.data.map((item) => {
+      if (!nameFullReg.test(item.valueName)) {
+        a = <p>errror</p>;
+      } else {
+        a = '';
+      }
+    });
     return (
       <>
         <form className="Form" onSubmit={this.handleSubmit}>
           <div>
             <span>Имя:</span>
             <input type="text" name="inputName" ref={this.inputName} required />
+            {a}
           </div>
           <div>
             <span>Дата:</span>
