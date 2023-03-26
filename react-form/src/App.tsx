@@ -12,13 +12,9 @@ interface Prop {
   images?: Blob | MediaSource | null;
 }
 
-// interface Val {
-//   images: File | null;
-// }
-
 interface State {
   data: Prop[];
-  // img: Val[];
+  isValidName: boolean;
 }
 
 export default class App extends Component<{}, State> {
@@ -31,6 +27,7 @@ export default class App extends Component<{}, State> {
       valueRadio: boolean;
       images: Blob | MediaSource;
     }[],
+    isValidName: true,
   };
 
   inputName = React.createRef<HTMLInputElement>();
@@ -43,22 +40,28 @@ export default class App extends Component<{}, State> {
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const nameFullReg = /^(([a-zA-Z]|[а-яА-Я]){3,})*$/;
+    if (!nameFullReg.test(this.inputName.current!.value) || this.inputName.current!.value === '') {
+      this.setState({ isValidName: false });
+      return false;
+    } else {
+      const data = {
+        valueName: this.inputName.current!.value,
+        valueDate: this.inputDate.current!.value,
+        valueSelect: this.dateSelect.current!.value,
+        valueCheckbox: this.checkbox.current!.checked,
+        valueRadio: this.inputRadio.current!.checked,
+        images: this.fileInputRef.current?.files && this.fileInputRef.current.files[0],
+      };
+      this.setState((prevState) => ({ data: [...prevState.data, data], isValidName: true }));
+      console.log(this.inputRadio.current!.name);
+      e.currentTarget.reset();
+    }
     // const valueName = this.inputName.current?.value || '';
     // const valueDate = this.inputDate.current?.value || '';
     // const valueSelect = this.dateSelect.current?.value || '';
     // const valueCheckbox = this.checkbox.current?.checked;
     // const valueRadio = this.inputRadio.current?.checked;
-    const data = {
-      valueName: this.inputName.current!.value,
-      valueDate: this.inputDate.current!.value,
-      valueSelect: this.dateSelect.current!.value,
-      valueCheckbox: this.checkbox.current!.checked,
-      valueRadio: this.inputRadio.current!.checked,
-      images: this.fileInputRef.current?.files && this.fileInputRef.current.files[0],
-    };
-    this.setState((prevState) => ({ data: [...prevState.data, data] }));
-
-    e.currentTarget.reset();
   };
 
   // handleClearButtonClick = () => {
@@ -71,24 +74,20 @@ export default class App extends Component<{}, State> {
 
   render() {
     const { data } = this.state;
-
-    const nameFullReg = /^(([a-zA-Z]|[а-яА-Я]){3,})*$/;
-    let a: JSX.Element | string = '';
-
-    this.state.data.map((item) => {
-      if (!nameFullReg.test(item.valueName)) {
-        a = <p>errror</p>;
-      } else {
-        a = '';
-      }
-    });
     return (
       <>
         <form className="Form" onSubmit={this.handleSubmit}>
           <div>
             <span>Имя:</span>
-            <input type="text" name="inputName" ref={this.inputName} required />
-            {a}
+            <input
+              placeholder="мин 3 буквы"
+              className={!this.state.isValidName ? 'error-input' : 'error-black'}
+              type="text"
+              name="inputName"
+              ref={this.inputName}
+              required
+            />
+            {!this.state.isValidName ? <p>error</p> : ''}
           </div>
           <div>
             <span>Дата:</span>
@@ -102,17 +101,37 @@ export default class App extends Component<{}, State> {
               <option>Ukraine</option>
             </select>
           </div>
-          <div>
-            <input type="checkbox" name="agree" ref={this.checkbox} required />
+          <div style={{ display: 'flex' }}>
+            <span>согласиться:</span>
+            <input
+              style={{ width: '4%', margin: '0px' }}
+              type="checkbox"
+              name="agree"
+              ref={this.checkbox}
+              required
+            />
           </div>
-          <div>
+          <div style={{ display: 'flex' }}>
             <label className="label-pol">
-              м: <input type="radio" name="pol" ref={this.inputRadio} required />
+              <span>м:</span>
+              <input
+                style={{ width: '100%', marginTop: '5px' }}
+                type="radio"
+                name="pol"
+                ref={this.inputRadio}
+                required
+              />
             </label>
 
-            <label className="label-pol">
-              ж:
-              <input type="radio" name="pol" ref={this.inputRadio} required />
+            <label style={{ marginLeft: '10px' }} className="label-pol">
+              <span>ж: </span>
+              <input
+                style={{ width: '100%', marginTop: '5px' }}
+                type="radio"
+                name="pol"
+                ref={this.inputRadio}
+                required
+              />
             </label>
           </div>
           <div>

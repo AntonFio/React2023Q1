@@ -44,3 +44,11 @@
 .label-pol{
   display: flex;
 }
+
+.error-input{
+  border: 1px solid red !important;
+}
+
+.error-black{
+  border: 1px solid black !important;
+}
