@@ -92,7 +92,14 @@ export default class App extends Component<{}, State> {
             <input type="checkbox" name="agree" ref={this.checkbox} required />
           </div>
           <div>
-            <input type="radio" name="radio" ref={this.inputRadio} required />
+            <label className="label-pol">
+              м: <input type="radio" name="pol" ref={this.inputRadio} required />
+            </label>
+
+            <label className="label-pol">
+              ж:
+              <input type="radio" name="pol" ref={this.inputRadio} required />
+            </label>
           </div>
           <div>
             <input type="file" accept="image/*" ref={this.fileInputRef} />
