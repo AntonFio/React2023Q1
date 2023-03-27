@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { Component } from 'react';
-import '../components/Cart.css';
+import '../components/CartForm.css';
 
 type Props = {
   name: string;
@@ -11,7 +11,7 @@ type Props = {
 
 type State = {};
 
-export default class Cart extends Component<Props, State> {
+export default class CartForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {};

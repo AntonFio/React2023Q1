@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Cart from '../components/Cart';
+import Cart from '../components/CartForm';
 
 test('render', () => {
   render(<Cart name={''} date={''} img={''} city={''} />);
