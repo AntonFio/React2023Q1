@@ -18,7 +18,7 @@ interface State {
   isImages: boolean;
 }
 
-export default class App extends Component<{}, State> {
+export default class Form extends Component<{}, State> {
   state = {
     data: [] as {
       valueName: string;

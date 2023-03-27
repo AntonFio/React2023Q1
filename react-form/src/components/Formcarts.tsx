@@ -11,7 +11,7 @@ type Props = {
 
 type State = {};
 
-export default class Cart extends Component<Props, State> {
+export default class Formcarts extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {};

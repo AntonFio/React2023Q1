@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import App from '../App';
 
-describe('App', () => {
-  test('render', () => {
+describe('App component', () => {
+  it('renders', () => {
     render(<App />);
-    const linkElement = screen.getByText(/Имя:/i);
-    expect(linkElement).toBeInTheDocument();
+    const homeElement = screen.getByText('Current page:');
+    expect(homeElement).toBeInTheDocument();
   });
 });
