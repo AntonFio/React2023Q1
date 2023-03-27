@@ -45,16 +45,6 @@ export default class Form extends Component<{}, State> {
     const nameFullReg = /^(([a-zA-Z]|[а-яА-Я]){3,})*$/;
     if (!nameFullReg.test(this.inputName.current!.value) || this.inputName.current!.value === '') {
       this.setState({ isValidName: false });
-      // if (
-      //   this.fileInputRef.current?.files &&
-      //   this.fileInputRef.current.files[0] &&
-      //   this.fileInputRef.current?.files.length > 0
-      // ) {
-      //   this.setState({ isImages: false });
-      //   return false;
-      // } else {
-      //   return false;
-      // }
       return false;
     } else if (
       !(
@@ -79,7 +69,6 @@ export default class Form extends Component<{}, State> {
         isValidName: true,
         isImages: true,
       }));
-      console.log(this.inputRadio.current!.name);
       e.currentTarget.reset();
     }
   };
