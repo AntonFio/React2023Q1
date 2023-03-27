@@ -16,6 +16,7 @@ interface State {
   data: Prop[];
   isValidName: boolean;
   isImages: boolean;
+  block: boolean;
 }
 
 export default class Form extends Component<{}, State> {
@@ -30,6 +31,7 @@ export default class Form extends Component<{}, State> {
     }[],
     isValidName: true,
     isImages: true,
+    block: false,
   };
 
   inputName = React.createRef<HTMLInputElement>();
@@ -69,6 +71,10 @@ export default class Form extends Component<{}, State> {
         isValidName: true,
         isImages: true,
       }));
+      this.setState({ block: true });
+      setTimeout(() => {
+        this.setState({ block: false });
+      }, 2000);
       e.currentTarget.reset();
     }
   };
@@ -161,6 +167,13 @@ export default class Form extends Component<{}, State> {
             city={item.valueSelect}
           />
         ))}
+        {this.state.block ? (
+          <div className="block-ok">
+            <span>Успешно!</span>
+          </div>
+        ) : (
+          ''
+        )}
       </>
     );
   }
