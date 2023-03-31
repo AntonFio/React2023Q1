@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/36</span>
+                <span class='fraction'>23/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/7</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">92% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/36</span>
+                <span class='fraction'>23/25</span>
             </div>
         
             
@@ -88,34 +88,13 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -132,43 +111,31 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useRef, useState } from 'react';
 &nbsp;
-type State = {
-  valueInput?: undefined | string;
-};
+const Search = () =&gt; {
+  const [search, setSearch] = useState('');
+  const valueRef = useRef(search);
 &nbsp;
-// eslint-disable-next-line @typescript-eslint/ban-types
-type Props = {};
-&nbsp;
-class Search extends React.Component&lt;Props, State&gt; {
-  constructor(props: Props) {
-    super(props);
-    this.state = { valueInput: '' };
-  }
-&nbsp;
-  handleChange = <span class="fstat-no" title="function not covered" >(e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({ valueInput: e.target.value });</span>
-<span class="cstat-no" title="statement not covered" >    console.log(this.state.valueInput);</span>
+  const onSearch = <span class="fstat-no" title="function not covered" >(e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    setSearch(e.target.value);</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 &nbsp;
-  componentDidMount() {
-    const local = localStorage.getItem('search');
-<span class="branch-0 cbranch-no" title="branch not covered" >    local ? this.setState({ valueInput: local }) : l</span>ocalStorage.setItem('search', '');
-  }
+  useEffect(() =&gt; {
+    setSearch(localStorage.getItem('search') || '');
+    return () =&gt; {
+      localStorage.setItem('search', valueRef.current);
+    };
+  }, []);
 &nbsp;
-  componentWillUnmount() {
-    const valueInput = this.state.<span class="branch-0 cbranch-no" title="branch not covered" >valueInput ? this.state.valueInput : '</span> ';
-    localStorage.setItem('search', valueInput);
-  }
+  useEffect(() =&gt; {
+    valueRef.current = search;
+  }, [search]);
 &nbsp;
-  render() {
-    return &lt;input type="search" value={this.state.valueInput} onChange={this.handleChange} /&gt;;
-  }
-}
+  return &lt;input type="search" value={search} onChange={onSearch} /&gt;;
+};
 &nbsp;
 export default Search;
 &nbsp;</pre></td></tr></table></pre>
@@ -178,7 +145,7 @@ export default Search;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-28T20:15:08.106Z
+                at 2023-03-31T21:56:01.561Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

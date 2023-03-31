@@ -7,7 +7,7 @@
   padding: 1%;
   border: 1px solid #000;
   border-radius: 10px;
-  width: 40%;
+  width: 35%;
   /* background-color: #a5abb1; */
   background: linear-gradient(90deg,rgb(148, 149, 160) 6%,rgb(172, 173, 185) 34%,rgb(193, 194, 207) 100%);
   box-shadow:
@@ -16,6 +16,7 @@
   23px 0 20px -23px rgba(0, 0, 0, .8),
   0 0 40px rgba(0, 0, 0, .1) inset;
   margin: 0 auto;
+  margin-top: 15px;
 }
 
 .Form div input{
