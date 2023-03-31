@@ -1,17 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import './Form.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import CartForm from '../components/CartForm';
-
-// interface Prop {
-//   valueName: string;
-//   valueDate: string;
-//   valueSelect: string;
-//   valueCheckbox: boolean;
-//   valueRadio: boolean;
-//   images?: Blob | MediaSource | null;
-// }
 
 enum GenderEnum {
   Minsk = 'Minsk',
@@ -25,44 +16,60 @@ interface IFormInput {
   valueSelect: GenderEnum;
   valueCheckbox: boolean;
   valueRadio: boolean;
+  images: string;
 }
 
 const Form = () => {
+  const [item, setItem] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<IFormInput>();
 
-  const onSubmit = (data: IFormInput) => console.log(JSON.stringify(data));
+  const onSubmit = (data: IFormInput) => {
+    const value = {
+      ...data,
+      image: URL.createObjectURL(data.images[0] as unknown as Blob),
+    };
+    reset();
+  };
+
+  useEffect(() => {
+  
+  }, []);
 
   return (
     <>
       <form className="Form" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <span>Имя:</span>
-          <input {...register('valueName')} />
-          <div>{errors?.valueName && <p>This field is required</p>}</div>
+          <input {...register('valueName', { required: true })} />
+          <div>{errors?.valueName && <p>This field</p>}</div>
         </div>
         <div>
           <span>Дата:</span>
-          <input type="date" {...register('valueDate')} />
+          <input type="date" {...register('valueDate', { required: true })} />
+          <div>{errors?.valueDate && <p>This field</p>}</div>
         </div>
         <div>
           <span>Город:</span>
-          <select className="Selrct-form" {...register('valueSelect')}>
+          <select className="Selrct-form" {...register('valueSelect', { required: true })}>
             <option value="Minsk">Minsk</option>
             <option value="Russia">Russia</option>
             <option value="Ukraine">Ukraine</option>
           </select>
+          <div>{errors?.valueSelect && <p>This field</p>}</div>
         </div>
         <div style={{ display: 'flex' }}>
           <span>согласиться:</span>
           <input
             style={{ width: '4%', margin: '0px' }}
             type="checkbox"
-            {...register('valueCheckbox')}
+            {...register('valueCheckbox', { required: true })}
           />
+          <div>{errors?.valueCheckbox && <p>This field</p>}</div>
         </div>
         <div style={{ display: 'flex' }}>
           <label className="label-pol">
@@ -70,7 +77,7 @@ const Form = () => {
             <input
               style={{ width: '100%', marginTop: '5px' }}
               type="radio"
-              {...register('valueRadio')}
+              {...register('valueRadio', { required: true })}
             />
           </label>
 
@@ -79,17 +86,28 @@ const Form = () => {
             <input
               style={{ width: '100%', marginTop: '5px' }}
               type="radio"
-              {...register('valueRadio')}
+              {...register('valueRadio', { required: true })}
             />
           </label>
+          <div>{errors?.valueRadio && <p>This field</p>}</div>
         </div>
         <div>
-          <input type="file" accept="image/*" />
+          <input type="file" accept="image/*" {...register('images', { required: true })} />
         </div>
         <div>
           <input className="Btn-form" type="submit" value="Submit" />
         </div>
       </form>
+
+      {/* {data.map((item, index) => (
+        <CartForm
+          key={index}
+          name={item.valueName}
+          date={item.valueDate}
+          img={URL.createObjectURL(item.images)}
+          city={item.valueSelect}
+        />
+      ))} */}
     </>
   );
 };
