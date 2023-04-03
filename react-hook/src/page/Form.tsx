@@ -18,10 +18,6 @@ interface IFormInput {
   image: string;
 }
 
-// interface IBlok {
-//   valueName: boolean;
-// }
-
 const Form = () => {
   const [item, setItem] = useState<IFormInput[]>([]);
   const [blok, setBlock] = useState(false);
