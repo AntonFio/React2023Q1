@@ -18,8 +18,13 @@ interface IFormInput {
   image: string;
 }
 
+// interface IBlok {
+//   valueName: boolean;
+// }
+
 const Form = () => {
   const [item, setItem] = useState<IFormInput[]>([]);
+  const [blok, setBlock] = useState(false);
   const {
     register,
     handleSubmit,
@@ -33,7 +38,10 @@ const Form = () => {
       image: URL.createObjectURL(data.image[0] as unknown as Blob),
     };
     setItem([...item, value]);
-    console.log(value.image);
+    setBlock(true);
+    setTimeout(() => {
+      setBlock(false);
+    }, 2000);
     reset();
   };
 
@@ -135,6 +143,13 @@ const Form = () => {
           img={item.image}
         />
       ))}
+      {blok ? (
+        <div className="block-ok">
+          <span>Успешно!</span>
+        </div>
+      ) : (
+        ''
+      )}
     </>
   );
 };
