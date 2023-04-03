@@ -59,10 +59,24 @@ const Form = () => {
         </div>
         <div>
           <span>Дата:</span>
-          <input type="date" {...register('valueDate', { required: true })} />
+          <input
+            type="date"
+            {...register('valueDate', {
+              required: 'Введите дату',
+              validate: (value) => {
+                const currentDate = new Date();
+                const inputDate = new Date(value);
+                if (inputDate > currentDate) {
+                  return 'Введите корректную дату';
+                }
+              },
+            })}
+          />
           <div>
-            {errors?.valueDate && (
-              <p style={{ margin: '0', padding: '0 0 10px 0', color: '#af0606' }}>Выбирите дату</p>
+            {errors.valueDate && (
+              <p style={{ margin: '0', padding: '0 0 10px 0', color: '#af0606' }}>
+                {errors.valueDate.message}
+              </p>
             )}
           </div>
         </div>
