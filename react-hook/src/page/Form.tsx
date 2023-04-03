@@ -7,6 +7,7 @@ enum GenderEnum {
   Minsk = 'Minsk',
   Russia = 'Russia',
   Ukraine = 'Ukraine',
+  Default = 'Default',
 }
 
 interface IFormInput {
@@ -26,7 +27,10 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+  });
 
   const onSubmit = (data: IFormInput) => {
     const value = {
@@ -82,7 +86,14 @@ const Form = () => {
         </div>
         <div>
           <span>Город:</span>
-          <select className="Selrct-form" {...register('valueSelect', { required: true })}>
+          <select
+            className="Selrct-form"
+            {...register('valueSelect', { required: true })}
+            defaultValue={'Default'}
+          >
+            <option value="Default" disabled>
+              ...
+            </option>
             <option value="Minsk">Minsk</option>
             <option value="Russia">Russia</option>
             <option value="Ukraine">Ukraine</option>
