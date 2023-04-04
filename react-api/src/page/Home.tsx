@@ -13,29 +13,38 @@ interface IParam {
   brand: string;
   category: string;
   thumbnail: string;
-  images: [];
+  images: Array<string>;
 }
 
 const Home: React.FC = () => {
-  const [param, setParam] = useState<IParam[]>([]);
+  const [param, setParam] = useState<Array<IParam>>([]);
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
       .then((res) => res.json())
-      .then((data) => setParam(data));
+      .then((data) => setParam(data.products));
   }, []);
 
   return (
     <>
       <Search />
-      <h2>
-        {/* {param.map((item) => {
-          <p key={item.id}>{item.title}</p>;
-        })} */}
-      </h2>
-      <Cart />
+      <div className="Carts">
+        {param.map((value, index) => {
+          return (
+            <Cart
+              key={index}
+              title={value.title}
+              brand={value.brand}
+              price={value.price}
+              images={value.images[0]}
+              id={value.id}
+              category={value.category}
+            />
+          );
+        })}
+      </div>
     </>
   );
-}
+};
 
 export default Home;

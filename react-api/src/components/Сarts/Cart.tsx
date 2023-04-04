@@ -1,29 +1,30 @@
 import React from 'react';
-import data from '../Сarts/data.json';
 import '../Сarts/Cart.css';
 
 interface Item {
   id: number;
   title: string;
   brand: string;
+  category: string;
   price: number;
   images: string;
 }
 
-const Cart = () => {
+const Cart = (props: Item) => {
   return (
-    <div className="Carts">
-      {data.map((item: Item) => (
-        <div key={item.id}>
-          <div className="Cart">
-            <div>{item.brand}</div>
-            <img src={item.images} alt="#" />
-            <div>{item.title}</div>
-            <div>{'$' + item.price}</div>
+    <>
+      <div>
+        <div className="Cart">
+          <div>{props.brand}</div>
+          <div className="cart-img">
+            <img src={props.images} alt="#" />
           </div>
+          <div>{props.title}</div>
+          <div>{'$' + props.price}</div>
+          <div>{props.category}</div>
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
 };
 
