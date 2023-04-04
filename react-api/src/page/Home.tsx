@@ -18,16 +18,27 @@ interface IParam {
 
 const Home: React.FC = () => {
   const [param, setParam] = useState<Array<IParam>>([]);
+  const [value, setValue] = useState('');
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products')
+    fetch(`https://dummyjson.com/products/search?q=${value}`)
       .then((res) => res.json())
       .then((data) => setParam(data.products));
-  }, []);
+  }, [value]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const query = form.search.value;
+    setValue(query);
+  };
 
   return (
     <>
-      <Search />
+      <form autoComplete="off" onSubmit={handleSubmit}>
+        <input type="search" name="search" />
+        <input type="submit" value="поиск" />
+      </form>
       <div className="Carts">
         {param.map((value, index) => {
           return (
