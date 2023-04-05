@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Search from '../components/Search/Search';
+import Modal from '../components/Modal/Modal';
+// import Search from '../components/Search/Search';
 import Cart from '../components/Сarts/Cart';
 
 interface IParam {
@@ -19,6 +20,7 @@ interface IParam {
 const Home: React.FC = () => {
   const [param, setParam] = useState<Array<IParam>>([]);
   const [value, setValue] = useState('');
+  const [modalActive, setModalActive] = useState(true);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/search?q=${value}`)
@@ -35,6 +37,7 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <button onClick={() => setModalActive(true)}>модал</button>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <input type="search" name="search" />
         <input type="submit" value="поиск" />
@@ -54,6 +57,7 @@ const Home: React.FC = () => {
           );
         })}
       </div>
+      <Modal active={modalActive} setActive={setModalActive} />
     </>
   );
 };
