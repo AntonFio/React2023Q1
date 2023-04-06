@@ -12,7 +12,7 @@
   transform: scale(1);
 }
 
-.modal.active{
+.moda.active{
   transform: scale(0);
 }
 

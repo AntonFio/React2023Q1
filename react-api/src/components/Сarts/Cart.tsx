@@ -8,13 +8,13 @@ interface Item {
   category: string;
   price: number;
   images: string;
-  onClick: () => void;
+  setActive: (arg0: boolean) => void;
 }
 
 const Cart = (props: Item) => {
   return (
     <>
-      <div className="Cart" {...props.onClick}>
+      <div className="Cart" onClick={() => props.setActive(true)}>
         <div>{props.brand}</div>
         <div className="cart-img">
           <img src={props.images} alt="#" />

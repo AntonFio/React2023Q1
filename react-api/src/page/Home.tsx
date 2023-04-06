@@ -46,7 +46,7 @@ const Home: React.FC = () => {
         {param.map((value, index) => {
           return (
             <Cart
-              onClick={() => setModalActive(false)}
+              setActive={setModalActive}
               key={index}
               title={value.title}
               brand={value.brand}
