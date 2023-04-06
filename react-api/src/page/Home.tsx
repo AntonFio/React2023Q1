@@ -21,6 +21,7 @@ const Home: React.FC = () => {
   const [param, setParam] = useState<Array<IParam>>([]);
   const [value, setValue] = useState('');
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const [cardId, setCardId] = useState<number>(0);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/search?q=${value}`)
@@ -54,11 +55,12 @@ const Home: React.FC = () => {
               images={value.images[0]}
               id={value.id}
               category={value.category}
+              cardId={setCardId}
             />
           );
         })}
       </div>
-      {modalActive && <Modal setActive={setModalActive} />}
+      {modalActive && <Modal setActive={setModalActive} cardId={cardId} param={param} />}
     </>
   );
 };

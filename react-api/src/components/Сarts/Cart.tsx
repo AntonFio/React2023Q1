@@ -9,12 +9,17 @@ interface Item {
   price: number;
   images: string;
   setActive: (arg0: boolean) => void;
+  cardId: (arg0: number) => void;
 }
 
 const Cart = (props: Item) => {
+  const handleCardClick = () => {
+    props.cardId(props.id);
+    props.setActive(true);
+  };
   return (
     <>
-      <div className="Cart" onClick={() => props.setActive(true)}>
+      <div className="Cart" onClick={handleCardClick}>
         <div>{props.brand}</div>
         <div className="cart-img">
           <img src={props.images} alt="#" />

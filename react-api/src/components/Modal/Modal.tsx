@@ -1,14 +1,46 @@
 import React from 'react';
 import './Modal.css';
 
-interface IProps {
-  setActive: (arg0: boolean) => void;
+interface IParam {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: Array<string>;
 }
 
-const Modal: React.FC<IProps> = ({ setActive }) => {
+interface IProps {
+  setActive: (arg0: boolean) => void;
+  cardId: number;
+  param: IParam[];
+}
+
+const Modal: React.FC<IProps> = ({ param, cardId, setActive }) => {
   return (
     <div className={'modal active'} onClick={() => setActive(false)}>
-      <div className="modal__content" onClick={(e) => e.stopPropagation()}></div>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+        {param.map((item) =>
+          item.id === cardId ? (
+            <div key={item.id} className="Cart">
+              <div>{item.brand}</div>
+              <div className="cart-img">
+                <img src={item.images[0]} alt="#" />
+              </div>
+              <div>{item.title}</div>
+              <div>{'$' + item.price}</div>
+              <div>{item.category}</div>
+            </div>
+          ) : (
+            ''
+          )
+        )}
+      </div>
     </div>
   );
 };
