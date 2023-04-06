@@ -20,7 +20,7 @@ interface IParam {
 const Home: React.FC = () => {
   const [param, setParam] = useState<Array<IParam>>([]);
   const [value, setValue] = useState('');
-  const [modalActive, setModalActive] = useState(true);
+  const [modalActive, setModalActive] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/search?q=${value}`)
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <button onClick={() => setModalActive(true)}>модал</button>
+      {/* <button onClick={() => setModalActive(true)}>модал</button> */}
       <form autoComplete="off" onSubmit={handleSubmit}>
         <input type="search" name="search" />
         <input type="submit" value="поиск" />
@@ -46,6 +46,7 @@ const Home: React.FC = () => {
         {param.map((value, index) => {
           return (
             <Cart
+              onClick={() => setModalActive(false)}
               key={index}
               title={value.title}
               brand={value.brand}
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
           );
         })}
       </div>
-      <Modal active={modalActive} setActive={setModalActive} />
+      {modalActive && <Modal setActive={setModalActive} />}
     </>
   );
 };

@@ -9,11 +9,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scale(0);
+  transform: scale(1);
 }
 
-.moda.active{
-  transform: scale(1);
+.modal.active{
+  transform: scale(0);
 }
 
 .modal__content{
