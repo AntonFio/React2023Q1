@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../components/Loading/Loading';
 import Modal from '../components/Modal/Modal';
 // import Search from '../components/Search/Search';
 import Cart from '../components/Сarts/Cart';
@@ -31,7 +32,7 @@ const Home: React.FC = () => {
         const data = await result.json();
         setParam(data.products);
         setLoading(false);
-      }, 2000);
+      }, 1000);
     };
     fetchData();
   }, [value]);
@@ -68,7 +69,7 @@ const Home: React.FC = () => {
             );
           })
         ) : (
-          <p className="loading">Loading...</p>
+          <Loading />
         )}
       </div>
       {modalActive && <Modal setActive={setModalActive} cardId={cardId} param={param} />}

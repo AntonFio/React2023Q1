@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/Сarts/Cart.tsx</title>
+    <title>Code coverage report for src/components/Modal/Modal.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/Сarts</a> Cart.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/Modal</a> Modal.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.57% </span>
+                <span class="strong">37.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/35</span>
+                <span class='fraction'>13/35</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.57% </span>
+                <span class="strong">37.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/35</span>
+                <span class='fraction'>13/35</span>
             </div>
         
             
@@ -109,10 +109,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -134,40 +134,40 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import '../Сarts/Cart.css';
+import './Modal.css';
+import { IParam } from '../../page/Home';
 &nbsp;
-interface Item {
-  id: number;
-  title: string;
-  brand: string;
-  category: string;
-  price: number;
-  images: string;
+interface IProps {
   setActive: (arg0: boolean) =&gt; void;
-  cardId: (arg0: number) =&gt; void;
+  cardId: number;
+  param: IParam[];
 }
 &nbsp;
-const Cart = <span class="fstat-no" title="function not covered" >(props: Item) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const handleCardClick = () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    props.cardId(props.id);</span>
-<span class="cstat-no" title="statement not covered" >    props.setActive(true);</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
+const Modal: React.FC&lt;IProps&gt; = <span class="fstat-no" title="function not covered" >({ param, cardId, setActive }) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div className="Cart" onClick={handleCardClick}&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div&gt;{props.brand}&lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="cart-img"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;img src={props.images} alt="#" /&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div&gt;{props.title}&lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div&gt;{'$' + props.price}&lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div&gt;{props.category}&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className={'modal active'} onClick={() =&gt; setActive(false)}&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div className="modal__content" onClick={(e) =&gt; e.stopPropagation()}&gt;</span>
+<span class="cstat-no" title="statement not covered" >        {param.map((item) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >          item.id === cardId ? (</span>
+<span class="cstat-no" title="statement not covered" >            &lt;div key={item.id} className="Cart"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div&gt;{item.brand}&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div className="cart-img"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;img src={item.images[0]} alt="#" /&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div&gt;{item.title}&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div&gt;{'$' + item.price}&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div&gt;{item.category}&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >          ) : (</span>
+<span class="cstat-no" title="statement not covered" >            ''</span>
+<span class="cstat-no" title="statement not covered" >          )</span>
+<span class="cstat-no" title="statement not covered" >        )}</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export default Cart;
+export default Modal;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
