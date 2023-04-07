@@ -6,7 +6,7 @@ interface ISearch {
 
 const Search: React.FC<ISearch> = ({ onSubmit }) => {
   return (
-    <form autoComplete="off" onSubmit={onSubmit}>
+    <form style={{ margin: '0 0 10px 0' }} autoComplete="off" onSubmit={onSubmit}>
       <input type="search" name="search" />
       <input type="submit" value="поиск" />
     </form>
