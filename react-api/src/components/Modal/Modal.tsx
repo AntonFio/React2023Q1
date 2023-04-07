@@ -14,14 +14,19 @@ const Modal: React.FC<IProps> = ({ param, cardId, setActive }) => {
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         {param.map((item) =>
           item.id === cardId ? (
-            <div key={item.id} className="Cart">
-              <div>{item.brand}</div>
-              <div className="cart-img">
-                <img src={item.images[0]} alt="#" />
+            <div key={item.id} className="wrapper-cart">
+              <div className="x" onClick={() => setActive(false)}>
+                X
               </div>
-              <div>{item.title}</div>
-              <div>{'$' + item.price}</div>
-              <div>{item.category}</div>
+              <div className="Cart-modal">
+                <div>{item.brand}</div>
+                <div className="cart-img">
+                  <img src={item.images[0]} alt="#" />
+                </div>
+                <div>{item.title}</div>
+                <div>{'$' + item.price}</div>
+                <div>{item.category}</div>
+              </div>
             </div>
           ) : (
             ''

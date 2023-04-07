@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Search from '../components/Search/Search';
 import Loading from '../components/Loading/Loading';
 import Modal from '../components/Modal/Modal';
-// import Search from '../components/Search/Search';
 import Cart from '../components/Сarts/Cart';
 
 export interface IParam {
@@ -46,11 +46,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {/* <button onClick={() => setModalActive(true)}>модал</button> */}
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <input type="search" name="search" />
-        <input type="submit" value="поиск" />
-      </form>
+      <Search onSubmit={handleSubmit} />
       <div className="Carts">
         {!loading ? (
           param.map((value, index) => {

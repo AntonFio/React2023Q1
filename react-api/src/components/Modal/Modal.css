@@ -21,3 +21,33 @@
   border-radius: 12px;
   background-color: aliceblue;
 }
+.wrapper-cart{
+  position: relative;
+}
+
+.x{
+  position: absolute;
+  top: -20px;
+  right: -12px;
+  cursor: pointer;
+}
+
+.Cart-modal{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 300px;
+  width: 300px;
+  margin-bottom: 15px;
+  background: #fff;
+}
+
+.Cart-modal img{
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+}
