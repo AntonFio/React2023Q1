@@ -1,19 +1,6 @@
 import React from 'react';
 import './Modal.css';
-
-interface IParam {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: Array<string>;
-}
+import { IParam } from '../../page/Home';
 
 interface IProps {
   setActive: (arg0: boolean) => void;

@@ -3,7 +3,7 @@ import Modal from '../components/Modal/Modal';
 // import Search from '../components/Search/Search';
 import Cart from '../components/Сarts/Cart';
 
-interface IParam {
+export interface IParam {
   id: number;
   title: string;
   description: string;
@@ -22,11 +22,18 @@ const Home: React.FC = () => {
   const [value, setValue] = useState('');
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/search?q=${value}`)
-      .then((res) => res.json())
-      .then((data) => setParam(data.products));
+    const fetchData = () => {
+      setTimeout(async () => {
+        const result = await fetch(`https://dummyjson.com/products/search?q=${value}`);
+        const data = await result.json();
+        setParam(data.products);
+        setLoading(false);
+      }, 2000);
+    };
+    fetchData();
   }, [value]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,21 +51,25 @@ const Home: React.FC = () => {
         <input type="submit" value="поиск" />
       </form>
       <div className="Carts">
-        {param.map((value, index) => {
-          return (
-            <Cart
-              setActive={setModalActive}
-              key={index}
-              title={value.title}
-              brand={value.brand}
-              price={value.price}
-              images={value.images[0]}
-              id={value.id}
-              category={value.category}
-              cardId={setCardId}
-            />
-          );
-        })}
+        {!loading ? (
+          param.map((value, index) => {
+            return (
+              <Cart
+                setActive={setModalActive}
+                key={index}
+                title={value.title}
+                brand={value.brand}
+                price={value.price}
+                images={value.images[0]}
+                id={value.id}
+                category={value.category}
+                cardId={setCardId}
+              />
+            );
+          })
+        ) : (
+          <p className="loading">Loading...</p>
+        )}
       </div>
       {modalActive && <Modal setActive={setModalActive} cardId={cardId} param={param} />}
     </>
