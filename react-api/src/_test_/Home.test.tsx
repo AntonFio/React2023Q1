@@ -3,9 +3,9 @@ import { describe } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 describe('Header', () => {
-  test('render', () => {
-    render(<Home />);
-    const linkElement = screen.getByText(/Home/i);
-    expect(linkElement).toBeInTheDocument();
+  it('render', async () => {
+    const { getByText } = render(<Home />);
+    const submit = getByText(/поиск/i);
+    expect(submit).toBeInTheDocument();
   });
 });
