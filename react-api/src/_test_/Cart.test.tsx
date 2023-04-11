@@ -1,6 +1,6 @@
 import Cart from '../components/Сarts/Cart';
 import { describe } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 describe('Cart', () => {
   it('Cart', async () => {
@@ -12,10 +12,10 @@ describe('Cart', () => {
         category={'category'}
         price={0}
         images={''}
-        setActive={function (arg0: boolean): void {
+        setActive={(): void => {
           throw new Error('Function not implemented.');
         }}
-        cardId={function (arg0: number): void {
+        cardId={function (): void {
           throw new Error('Function not implemented.');
         }}
       />

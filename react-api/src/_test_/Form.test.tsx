@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import Form from '../page/Form';
 

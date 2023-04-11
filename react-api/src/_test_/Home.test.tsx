@@ -1,6 +1,6 @@
 import Home from '../page/Home';
 import { describe } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 describe('Header', () => {
   it('render', async () => {

@@ -17,7 +17,7 @@ test('Modal renders correctly', () => {
 
   render(
     <Modal
-      setActive={function (arg0: boolean): void {
+      setActive={function (): void {
         throw new Error('Function not implemented.');
       }}
       cardId={0}
@@ -30,7 +30,7 @@ test('Modal renders correctly', () => {
       <Modal
         cardId={0}
         param={[]}
-        setActive={function (arg0: boolean): void {
+        setActive={function (): void {
           throw new Error('Function not implemented.');
         }}
       />
