@@ -20,7 +20,10 @@ export interface IParam {
 
 const Home: React.FC = () => {
   const [param, setParam] = useState<Array<IParam>>([]);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(() => {
+    const param = localStorage.getItem('param');
+    return param || '';
+  });
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,11 +45,17 @@ const Home: React.FC = () => {
     const form = e.currentTarget;
     const query = form.search.value;
     setValue(query);
+    query ? localStorage.setItem('param', query) : '';
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setValue(event.target.value);
   };
 
   return (
     <>
-      <Search onSubmit={handleSubmit} />
+      <Search onSubmit={handleSubmit} value={value} onChange={handleChange} />
       <div className="Carts">
         {!loading ? (
           param.map((value, index) => {
