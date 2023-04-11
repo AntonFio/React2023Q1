@@ -27,6 +27,10 @@ const Home: React.FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
+  const [local, setLocal] = useState(() => {
+    const param = localStorage.getItem('param');
+    return param || '';
+  });
 
   useEffect(() => {
     const fetchData = () => {
@@ -45,17 +49,17 @@ const Home: React.FC = () => {
     const form = e.currentTarget;
     const query = form.search.value;
     setValue(query);
-    query ? localStorage.setItem('param', query) : '';
+    localStorage.setItem('param', query);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setValue(event.target.value);
+    setLocal(event.target.value);
   };
 
   return (
     <>
-      <Search onSubmit={handleSubmit} value={value} onChange={handleChange} />
+      <Search onSubmit={handleSubmit} value={local} onChange={handleChange} />
       <div className="Carts">
         {!loading ? (
           param.map((value, index) => {
