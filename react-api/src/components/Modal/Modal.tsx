@@ -26,6 +26,11 @@ const Modal: React.FC<IProps> = ({ param, cardId, setActive }) => {
                 <div>{item.title}</div>
                 <div>{'$' + item.price}</div>
                 <div>{item.category}</div>
+                <div>
+                  <span style={{ margin: '10px' }}>кол-во: {item.stock}</span>
+                  <span>рейтинг: {item.rating}</span>
+                </div>
+                <div>{item.description}</div>
               </div>
             </div>
           ) : (
