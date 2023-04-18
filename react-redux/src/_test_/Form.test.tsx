@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import Form from '../page/Form';
+import renderWithProviders from './renderProvider';
 
 describe('Form', () => {
   it('render', async () => {
-    const { getByText, getByRole } = render(<Form />);
+    const { getByText, getByRole } = renderWithProviders(<Form />);
     const existButton = getByRole('button');
     expect(existButton).toBeInTheDocument();
 
