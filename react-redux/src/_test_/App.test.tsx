@@ -1,13 +1,16 @@
 import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
 
-test('renders app component', () => {
-  const { getByText } = render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-  const linkElement = getByText(/About Us/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+  it('renders header and all routes', () => {
+    const { queryByText } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <App />
+      </MemoryRouter>
+    );
+    expect(queryByText('Home')).toBeInTheDocument();
+    expect(queryByText('About Us')).toBeInTheDocument();
+    expect(queryByText('Form')).toBeInTheDocument();
+  });
 });

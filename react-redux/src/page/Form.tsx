@@ -64,7 +64,7 @@ const Form = () => {
           />
           <div>
             {errors?.valueName && (
-              <p style={{ margin: '0', padding: '0 0 10px 0', color: '#af0606' }}>
+              <p style={{ margin: '0', padding: '0 0 10px 0', color: '#af0606' }} role="warning">
                 Введите имя(мин 3 буквы)
               </p>
             )}
