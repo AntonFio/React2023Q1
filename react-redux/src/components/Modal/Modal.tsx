@@ -1,18 +1,18 @@
 import React from 'react';
 import './Modal.css';
-import { IParam } from '../../page/Home';
+import { IParam } from '../../store/reduser/api';
 
 interface IProps {
   setActive: (arg0: boolean) => void;
   cardId: number;
-  param: IParam[];
+  par: IParam[];
 }
 
-const Modal: React.FC<IProps> = ({ param, cardId, setActive }) => {
+const Modal: React.FC<IProps> = ({ par, cardId, setActive }) => {
   return (
     <div className={'modal active'} onClick={() => setActive(false)}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        {param.map((item) =>
+        {par.map((item) =>
           item.id === cardId ? (
             <div key={item.id} className="wrapper-cart">
               <div className="x" onClick={() => setActive(false)}>

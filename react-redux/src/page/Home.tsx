@@ -1,50 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Search from '../components/Search/Search';
 import Loading from '../components/Loading/Loading';
 import Modal from '../components/Modal/Modal';
 import Cart from '../components/Сarts/Cart';
-// import { useGetPostsQuery } from '../store/api';
-
-export interface IParam {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: Array<string>;
-}
+import { useGetProductQuery } from '../store/reduser/api';
 
 const Home: React.FC = () => {
-  // const { isLoading, isError, data } = useGetPostsQuery();
-  const [param, setParam] = useState<Array<IParam>>([]);
   const [value, setValue] = useState(() => {
     const param = localStorage.getItem('param');
     return param || '';
   });
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
   const [local, setLocal] = useState(() => {
     const param = localStorage.getItem('param');
     return param || '';
   });
-
-  useEffect(() => {
-    const fetchData = () => {
-      setTimeout(async () => {
-        const result = await fetch(`https://dummyjson.com/products/search?q=${value}`);
-        const data = await result.json();
-        setParam(data.products);
-        setLoading(false);
-      }, 1000);
-    };
-    fetchData();
-  }, [value]);
+  const { isLoading, data } = useGetProductQuery(value);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,8 +35,8 @@ const Home: React.FC = () => {
     <>
       <Search onSubmit={handleSubmit} value={local} onChange={handleChange} />
       <div className="Carts">
-        {!loading ? (
-          param.map((value, index) => {
+        {!isLoading ? (
+          data?.products.map((value, index) => {
             return (
               <Cart
                 setActive={setModalActive}
@@ -83,7 +55,9 @@ const Home: React.FC = () => {
           <Loading />
         )}
       </div>
-      {modalActive && <Modal setActive={setModalActive} cardId={cardId} param={param} />}
+      {modalActive && !isLoading && data?.products && (
+        <Modal setActive={setModalActive} cardId={cardId} par={data?.products} />
+      )}
     </>
   );
 };
