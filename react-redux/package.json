@@ -45,7 +45,7 @@
     "vite": "^4.2.0",
     "vitest": "^0.29.3"
   },
-  "jest": {
+  "vite": {
     "collectCoverageFrom": [
       "!src/main.tsx"
     ]
