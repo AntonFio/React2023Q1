@@ -3,6 +3,7 @@ import Search from '../components/Search/Search';
 import Loading from '../components/Loading/Loading';
 import Modal from '../components/Modal/Modal';
 import Cart from '../components/Сarts/Cart';
+// import { useGetPostsQuery } from '../store/api';
 
 export interface IParam {
   id: number;
@@ -19,6 +20,7 @@ export interface IParam {
 }
 
 const Home: React.FC = () => {
+  // const { isLoading, isError, data } = useGetPostsQuery();
   const [param, setParam] = useState<Array<IParam>>([]);
   const [value, setValue] = useState(() => {
     const param = localStorage.getItem('param');

@@ -2,6 +2,9 @@ import './Form.css';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import CartForm from '../components/CartForm';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../store/store';
+import { addCard } from '../store/reduser/formSlice';
 
 enum GenderEnum {
   Minsk = 'Minsk',
@@ -20,8 +23,8 @@ interface IFormInput {
 }
 
 const Form = () => {
-  const [item, setItem] = useState<IFormInput[]>([]);
   const [blok, setBlock] = useState(false);
+  const [img, setImg] = useState('');
   const {
     register,
     handleSubmit,
@@ -32,17 +35,23 @@ const Form = () => {
     reValidateMode: 'onSubmit',
   });
 
+  const newDataUser: Array<IFormInput> = useAppSelector((state) => state.form.cards);
+  const dispatch = useDispatch();
+
   const onSubmit = (data: IFormInput) => {
-    const value = {
-      ...data,
-      image: URL.createObjectURL(data.image[0] as unknown as Blob),
-    };
-    setItem([...item, value]);
+    data.image = img;
+    dispatch(addCard({ card: data }));
     setBlock(true);
     setTimeout(() => {
       setBlock(false);
     }, 2000);
     reset();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImg(URL.createObjectURL(e.target.files[0]));
+    }
   };
 
   return (
@@ -144,7 +153,12 @@ const Form = () => {
           <p style={{ margin: '0', padding: '0 0 10px 0', color: '#af0606' }}>Выбирите пол</p>
         )}
         <div>
-          <input type="file" accept="image/*" {...register('image', { required: true })} />
+          <input
+            type="file"
+            accept="image/*"
+            {...register('image', { required: true })}
+            onChange={handleFileChange}
+          />
           {errors?.image && (
             <p style={{ margin: '0', padding: '0 0 10px 0', color: '#af0606' }}>
               Выбирите картинку
@@ -155,7 +169,7 @@ const Form = () => {
           <input className="Btn-form" type="submit" value="Submit" />
         </div>
       </form>
-      {item.map((item, index) => (
+      {newDataUser.map((item, index) => (
         <CartForm
           key={index}
           name={item.valueName}
