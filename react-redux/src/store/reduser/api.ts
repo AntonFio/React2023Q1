@@ -1,3 +1,4 @@
+import { createSlice } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export interface IParam {
@@ -26,6 +27,24 @@ export interface IResponse {
   products: IParam[];
 }
 
+interface IState {
+  createdParam: IParam[];
+}
+
+const initialState: IState = {
+  createdParam: [],
+};
+
+export const createdParamSlice = createSlice({
+  name: 'cards',
+  initialState,
+  reducers: {
+    addParam: (state, { payload }) => {
+      state.createdParam.push(payload);
+    },
+  },
+});
+
 export const searchApi = createApi({
   reducerPath: 'api/products',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com' }),
@@ -37,3 +56,5 @@ export const searchApi = createApi({
 });
 
 export const { useGetProductQuery } = searchApi;
+export const { addParam } = createdParamSlice.actions;
+export default createdParamSlice.reducer;

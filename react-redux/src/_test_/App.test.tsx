@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
+import renderWithProviders from './renderProvider';
 
 describe('App', () => {
   it('renders header and all routes', () => {
-    const { queryByText } = render(
+    const { queryByText } = renderWithProviders(
       <MemoryRouter initialEntries={['/']}>
         <App />
       </MemoryRouter>

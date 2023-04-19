@@ -1,10 +1,10 @@
 import Home from '../page/Home';
 import { describe } from 'vitest';
-import { render } from '@testing-library/react';
+import renderWithProviders from './renderProvider';
 
 describe('Header', () => {
   it('render', async () => {
-    const { getByText } = render(<Home />);
+    const { getByText } = renderWithProviders(<Home />);
     const submit = getByText(/поиск/i);
     expect(submit).toBeInTheDocument();
   });

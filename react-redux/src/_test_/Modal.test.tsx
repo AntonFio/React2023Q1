@@ -21,7 +21,7 @@ test('Modal renders correctly', () => {
         throw new Error('Function not implemented.');
       }}
       cardId={0}
-      param={[]}
+      par={[]}
     />
   );
 
@@ -29,10 +29,10 @@ test('Modal renders correctly', () => {
     render(
       <Modal
         cardId={0}
-        param={[]}
         setActive={function (): void {
           throw new Error('Function not implemented.');
         }}
+        par={[]}
       />
     );
   });
