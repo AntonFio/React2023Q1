@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681935527623" clover="3.2.0">
-  <project timestamp="1681935527623" name="All files">
-    <metrics statements="499" coveredstatements="401" conditionals="32" coveredconditionals="25" methods="23" coveredmethods="14" elements="554" coveredelements="440" complexity="0" loc="499" ncloc="499" packages="9" files="13" classes="13"/>
+<coverage generated="1681936317781" clover="3.2.0">
+  <project timestamp="1681936317781" name="All files">
+    <metrics statements="482" coveredstatements="401" conditionals="31" coveredconditionals="25" methods="22" coveredmethods="14" elements="535" coveredelements="440" complexity="0" loc="482" ncloc="482" packages="9" files="12" classes="12"/>
     <package name="src">
-      <metrics statements="41" coveredstatements="24" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+      <metrics statements="24" coveredstatements="24" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="App.tsx" path="C:\Users\User\Desktop\React2023Q1\react-redux\src\App.tsx">
         <metrics statements="24" coveredstatements="24" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -30,26 +30,6 @@
         <line num="22" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
-      </file>
-      <file name="main.tsx" path="C:\Users\User\Desktop\React2023Q1\react-redux\src\main.tsx">
-        <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src._test_">
