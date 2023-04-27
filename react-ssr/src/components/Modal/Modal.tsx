@@ -1,0 +1,45 @@
+import React from 'react';
+import './Modal.css';
+import { IParam } from '../../store/reduser/api';
+
+interface IProps {
+  setActive: (arg0: boolean) => void;
+  cardId: number;
+  par: IParam[];
+}
+
+const Modal: React.FC<IProps> = ({ par, cardId, setActive }) => {
+  return (
+    <div className={'modal active'} onClick={() => setActive(false)}>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+        {par.map((item) =>
+          item.id === cardId ? (
+            <div key={item.id} className="wrapper-cart">
+              <div className="x" onClick={() => setActive(false)}>
+                X
+              </div>
+              <div className="Cart-modal">
+                <div>{item.brand}</div>
+                <div className="cart-img">
+                  <img src={item.images[0]} alt="#" />
+                </div>
+                <div>{item.title}</div>
+                <div>{'$' + item.price}</div>
+                <div>{item.category}</div>
+                <div>
+                  <span style={{ margin: '10px' }}>кол-во: {item.stock}</span>
+                  <span>рейтинг: {item.rating}</span>
+                </div>
+                <div>{item.description}</div>
+              </div>
+            </div>
+          ) : (
+            ''
+          )
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Modal;
