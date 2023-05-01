@@ -1,0 +1,16 @@
+.load{
+  width: 100px;
+  height: 12px;
+  background: linear-gradient(#3182df 0 0) left / 0% 100% no-repeat #fff;
+  animation: animate 1.5s linear infinite;
+  line-height: 12px;
+  font-size: 10px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+@keyframes animate{
+  100%{
+    background-size: 100% 100%;
+  }
+}
